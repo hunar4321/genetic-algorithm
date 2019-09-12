@@ -1,5 +1,14 @@
-## A simple evolutionary algorithm that competes between two networks: father (f) & child (c) networkd
-## The algorithm simultaniously mutate all the weights and choose the better nework for the next generation 
+## @ Hunar Ahmad Abdulrahman
+
+'''
+A simple evolutionary algorithm (Simultaneous update of all the weights)implemented both in python and C++. 
+The algorithm is very simple conceptually. it competes between two networks: father (f) & child (c) network 
+and simultaneously mutates all the weights of the child network then chooses the better network to become the father of the next generation. 
+For low dimensional data, this algorithm can be as efficient as naive gradient decent 
+and that is because it doesn't require the backward pass (back-propagtion), instead it requires 2 forward passes (which are less intensive computationally than the backward pass). 
+Also, if the loss functions is not convex or the local minima hides in a narrow and elongated ridge, then this algorithm can be more efficient than the naive gradient decent which produces a zigzagged path towards the local minima.
+
+'''
 
 import random;
 import math;
@@ -7,13 +16,15 @@ from matplotlib import pylab as plt
 import numpy as np
 
 
-## helper functions
+################ helper functions #####################
 def gen_weight(): 
   return random.uniform(-1,1);
 def activationF(val):
     return math.tanh(val)
 #  return max(0, val)
 
+
+############### MODEL ##########################
 class Edge:
     # defines two weighted connections between 2 nodes
     def __init__(self):
@@ -87,14 +98,14 @@ class Layer:
             for tn in targLayer.nodes:
                 sn.connectTo(net, tn, gen_weight());
     
-    ## sparse connected layers, randomly connect            
+    ## sparsely connected layers, randomly connected            
     def sconnectTo(self, net, targLayer, sparse_rate):
         for sn in self.nodes:
             for tn in targLayer.nodes:
                 if(random.random() < sparse_rate):
                     sn.connectTo(net, tn, gen_weight());
                 
-        
+################# NETWORK STRUCTURE ############################        
 class Network:
     # defines the network
     def __init__(self, L1, L2, L3):
@@ -145,9 +156,10 @@ class Network:
         self.hidden.resetLayer();
         self.out.resetLayer();               
 
-## network for predictiong Xor problem       
+################## USER AREA ########################
+
 epochs = 1000;
-lr = 0.1;
+lr = 0.1; #learning rate
 ers =[];
 
 ## network configuration: input=2, hidden_nodes = 5, output =1
@@ -155,6 +167,7 @@ net = Network(2, 5, 1);
 net.fullyConnect();
 #net.sparseConnect([0.5, 1]);
 
+# trainig data & labels: XOR problem
 inputs=[[0,0],[1,1],[0,1],[1,0]];
 labels=[0,0,1,1];
 
@@ -171,7 +184,7 @@ for i in range(epochs):
         fE = fE + abs(net.out.nodes[0].fY - label);
         cE = cE + abs(net.out.nodes[0].cY - label);
     
-    # update if the child performs better than the father    
+    # update if the child performs better than the father i.e. the child network becomes the father of the next gneration  
     if(fE > cE):
         net.updateWeights()
     
