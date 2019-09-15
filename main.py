@@ -13,8 +13,6 @@ Also, if the loss functions is not convex or the local minima hides in a narrow 
 import random;
 import math;
 from matplotlib import pylab as plt
-import numpy as np
-
 
 ################ helper functions #####################
 def gen_weight(): 
