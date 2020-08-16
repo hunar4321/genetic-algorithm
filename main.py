@@ -1,4 +1,4 @@
-## @ Hunar Ahmad Abdulrahman
+## Hunar Ahmad @ Brainxyz
 
 '''
 A simple evolutionary algorithm (Simultaneous update of all the weights)implemented both in python and C++. 
