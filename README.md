@@ -8,8 +8,8 @@ https://colab.research.google.com/drive/18Q9W9WcjnWt8sVcWRIORb1KWrRry6-5L
 
 
 **Disadvantages of genetic algorthim:**
-1. It is a population based learning (Can be inefficient without parallelization).
+1. It is a population based learning (can be inefficient without parallelization).
 2. If mutation rate is high the learning is unpredictable and noisy. If mutation rate is low the learning is slow and can stuck in a local minima
 3. Bad performance for very high dimensional and complex data patterns
 
-Currently we are working to overcome the limitations above by using a novel algorthim we call it **Predictive Hebbian Unified Neurons** or PHUN which shows promssing results. For more info about PHUN visit us at: https://www.brainxyz.com/ 
+Currently we are working to overcome the limitations above by using a novel algorthim we call it **Predictive Hebbian Unified Neurons** or PHUN which shows promising results. For more info about PHUN visit us at: https://www.brainxyz.com/ 
