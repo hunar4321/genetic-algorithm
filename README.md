@@ -13,3 +13,6 @@ https://colab.research.google.com/drive/18Q9W9WcjnWt8sVcWRIORb1KWrRry6-5L
 3. Bad performance for very high dimensional and complex data patterns
 
 Currently we are working to overcome the limitations above by using a novel algorthim we call it **Predictive Hebbian Unified Neurons** or PHUN which shows promising results. For more info about PHUN visit us at: https://www.brainxyz.com/ 
+
+
+License: MIT
