@@ -1,3 +1,4 @@
+
 ## Hunar Ahmad @ Brainxyz.com
 
 '''
@@ -8,7 +9,7 @@ For low dimensional data, this algorithm can be as efficient as naive gradient d
 and that is because it doesn't require the backward pass (back-propagtion), instead it requires 2 forward passes (which are less intensive computationally than the backward pass). 
 Also, if the loss functions is not convex or the local minima hides in a narrow and elongated ridge, then this algorithm can be more efficient than the naive gradient decent which produces a zigzagged path towards the local minima.
 
-Please note that we at Brainxyz currently working on a better appreach to effiently learn from the feedback. For for info visit us at: https://www.brainxyz.com/
+Please note that we at Brainxyz currently working on a better appreach to efficiently learn from the feedback. For for info visit us at: https://www.brainxyz.com/
 
 '''
 
@@ -19,10 +20,10 @@ from matplotlib import pylab as plt
 ################ helper functions #####################
 def gen_weight(): 
   return random.uniform(-1,1);
+
 def activationF(val):
     return math.tanh(val)
 #  return max(0, val)
-
 
 ############### MODEL ##########################
 class Edge:
@@ -91,7 +92,6 @@ class Layer:
             n.fY = activationF(n.fY);
             n.cY = activationF(n.cY);
         
-
     ## fully connected layers        
     def fconnectTo(self, net, targLayer):
         for sn in self.nodes:
@@ -108,8 +108,7 @@ class Layer:
 ################# NETWORK STRUCTURE ############################        
 class Network:
     # defines the network
-    def __init__(self, L1, L2, L3):
-        
+    def __init__(self, L1, L2, L3):        
         self.edgeList =[];
         self.sensor = Layer();
         self.hidden = Layer();
@@ -128,17 +127,14 @@ class Network:
         ## sparsely connected
         self.sensor.sconnectTo(self, self.hidden, amount[0]);
         self.hidden.sconnectTo(self, self.out, amount[1]);
-        
-        
+                
     def setInput(self, inputs):
         for i in range(len(inputs)):
             self.sensor.nodes[i].fY = inputs[i];
             self.sensor.nodes[i].cY = inputs[i];
             
-    def forward(self, inputs):
-        
-        self.setInput(inputs); 
-         
+    def forward(self, inputs):        
+        self.setInput(inputs);          
         self.sensor.spreadOut();
         self.hidden.activate();
         self.hidden.spreadOut();
@@ -158,49 +154,141 @@ class Network:
 
 ################## USER AREA ########################
 
-epochs = 1000;
-lr = 0.1; #learning rate
-ers =[];
+Problem = "cartpole"  ## Problem types: cartpole, xor
 
-## network configuration: input=2, hidden_nodes = 5, output =1
-net = Network(2, 5, 1); 
-net.fullyConnect();
-#net.sparseConnect([0.5, 1]);
-
-# trainig data & labels: XOR problem
-inputs=[[0,0],[1,1],[0,1],[1,0]];
-labels=[0,0,1,1];
-
-# training loop
-for i in range(epochs):
-    fE=0; cE=0; # initialize father Erorr (fE) and child Error (cE)
+##### 1. XOR #######
+if(Problem == "xor"):
+    print("XOR Problem")
+    
+    epochs = 1000;
+    lr = 0.1; #mutation rate similar to learning rate
+    
+    ## network configuration: input=2, hidden_nodes = 5, output =1
+    net = Network(2, 5, 1); 
+    net.fullyConnect();
+    #net.sparseConnect([0.5, 1]);
+    
+    # data & labels: XOR problem
+    inputs=[[0,0],[1,1],[0,1],[1,0]];
+    labels=[0,0,1,1];
+    
+    # training loop 
+    print("Training Started ...")
+    ers =[];
+    for i in range(epochs):
+        fE=0; cE=0; # initialize father Erorr (fE) and child Error (cE)
+        for j in range(len(labels)):     
+            net.resetNet();
+            net.forward(inputs[j]);        
+            # calculates the network error 
+            fE = fE + abs(net.out.nodes[0].fY - labels[j]);
+            cE = cE + abs(net.out.nodes[0].cY - labels[j]);
+        
+        # update if the child performs better than the father i.e. the child network becomes the father of the next gneration  
+        if(fE > cE):
+            net.updateWeights()
+        
+        ## mutate again
+        net.mutateWeights(lr)
+            
+        if(i % 10 ==0):
+            ers.append(fE);
+    print("Training Finished")
+    ## asses the trained network
+    print("Network Assesment - XOR problem")
     for j in range(len(labels)):
-        inp = inputs[j];
-        label = labels[j];        
         net.resetNet();
+        inp = inputs[j];
+        label = labels[j];
         net.forward(inp);
-        
-        # calculates the network error 
-        fE = fE + abs(net.out.nodes[0].fY - label);
-        cE = cE + abs(net.out.nodes[0].cY - label);
-    
-    # update if the child performs better than the father i.e. the child network becomes the father of the next gneration  
-    if(fE > cE):
-        net.updateWeights()
-    
-    ## mutate again
-    net.mutateWeights(lr)
-        
-    if(i % 10 ==0):
-        ers.append(fE);
+        print( "target:",label ," pred:", net.out.nodes[0].fY )
+            
+    plt.plot(ers)
+    plt.title("Error")
 
-## asses the trained network
-for j in range(len(labels)):
-    net.resetNet();
-    inp = inputs[j];
-    label = labels[j];
-    net.forward(inp);
-    print( "target:",label ," pred:", net.out.nodes[0].fY )
+#### 2. Cartpole Problem #####
+elif(Problem == "cartpole"):
+    print("Cartpole Problem") 
+       
+    import gym
+     
+    lr = 0.1 ## mutation rate (similar to learning rate)
+    epi = 100 ## number of episodes
+    step_limit = 200
+    
+    ## configure the network structure
+    n_input=4
+    n_nodes=10
+    n_output=1
+    net = Network(n_input, n_nodes, n_output); 
+    net.fullyConnect();
+    #net.sparseConnect([0.5, 1]);
+
+    env = gym.make("CartPole-v0")
+
+    print("Training Started...")
+    observation = env.reset()
+    step_progress=[];    
+    for i in range(epi):
         
-plt.plot(ers)
-plt.title("error")
+        net.mutateWeights(lr) ## makes a mutated child copy from the father copy
+        stepsF = [];
+        stepsC = []
+
+        ### evaluates the father network
+        observation =  env.reset() 
+        action = 0
+        for step in range(step_limit):                 
+            net.resetNet()
+            net.forward(observation)    
+            output = net.out.nodes[0].fY ##output of father network            
+            action = 1 if output > 0 else 0
+            observation, reward, done, info = env.step(action)            
+            if(done==True):
+                stepFather = step
+                break
+            
+        ### evaluates the mutated child network
+        observation =  env.reset() 
+        action = 0
+        for step in range(step_limit):                 
+            net.resetNet()
+            net.forward(observation)    
+            output = net.out.nodes[0].cY ##output of child network          
+            action = 1 if output > 0 else 0
+            observation, reward, done, info = env.step(action)            
+            if(done==True):
+                stepChild = step
+                break
+              
+        if(stepChild > stepFather):
+            net.updateWeights()
+            
+        step_progress.append(stepChild)            
+    env.close()
+    print("Training Finished")
+    
+    plt.figure(1)
+    plt.plot(step_progress)
+    plt.title("Performance")
+    
+    # #### render the trained network
+    # observation = env.reset()
+    # action = 0
+    # for t in range(500):
+    #     env.render()
+    #     net.resetNet()
+    #     net.forward(observation)    
+    #     output = net.out.nodes[0].cY            
+    #     action = 1 if output > 0 else 0
+    #     observation, reward, done, info = env.step(action)
+    #     if(done==True):
+    #         steps = t
+    #         break
+    # print("step:", steps)
+    # env.close()
+
+
+            
+
+
