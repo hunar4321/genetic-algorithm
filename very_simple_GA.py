@@ -1,3 +1,9 @@
+"""
+@author: Hunar @ Brainxyz
+below is a very simple implementation of a GA based neural network which solves the XOR problem
+"""
+
+
 import numpy as np
 import matplotlib.pyplot as plt
 
