@@ -32,10 +32,10 @@ def train(X, y, w1, w2, iterations):
         yh1 = feedforward(X,   w1,   w2); #parent network
         yh2 = feedforward(X, m_w1, m_w2); #child network (mutated weights)
         
-        err_father = np.sum(np.abs(y - yh1.ravel())); #evaluate parent
+        err_parent = np.sum(np.abs(y - yh1.ravel())); #evaluate parent
         err_child =  np.sum(np.abs(y - yh2.ravel())); #evaluate child 
         
-        if(err_child < err_father): # select better
+        if(err_child < err_parent): # select better
             w1 = m_w1;
             w2 = m_w2;   
             
@@ -54,3 +54,4 @@ print(feedforward(X, m_w1, m_w2))
 plt.figure(1)
 plt.plot(errs)
 plt.title('errors')
+
