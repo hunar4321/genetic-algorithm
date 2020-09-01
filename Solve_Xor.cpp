@@ -1,4 +1,4 @@
-//@Hunar Ahmad Abdulrahman
+//Hunar @ Brainxyz.com
 
 #pragma once
 #include <iostream>
