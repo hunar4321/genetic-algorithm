@@ -9,11 +9,12 @@ For a detailed comparision between this GA method vs SGD methods please refer to
 https://www.brainxyz.com/machine-learning/genetic-algorthim/
 
 **Files:**
-*very_simple_GA.py:* This file contains a very simple GA implemenation using numpy (few lines of code). It solves the XOR problem.
 
-*Solve_Xor_and_Cartople.py:* This file implements GA from scratch using object oriented principles which give more flexibility to structure the network and It has been showcased to solve clasififcation problems (Xor) and reinforcement learning (Cartople) using the same code base.
+1. *very_simple_GA.py:* This file contains a very simple GA implemenation using numpy (few lines of code). It solves the XOR problem.
 
-*Solve_Xor.cpp:* a C++ implentation of the same code.
+2. *Solve_Xor_and_Cartople.py:* This file implements GA from scratch using object oriented principles which give more flexibility to structure the network and It has been showcased to solve clasififcation problems (Xor) and reinforcement learning (Cartople) using the same code base.
+
+3. *Solve_Xor.cpp:* a C++ implentation of the same code.
 
 
 ![](images/after-learning.gif)
