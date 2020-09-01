@@ -1,18 +1,6 @@
 
 ## Hunar Ahmad @ Brainxyz.com
 
-'''
-A simple evolutionary algorithm (Simultaneous update of all the weights)implemented both in python and C++. 
-The algorithm is very simple conceptually. it competes between two networks: father (f) & child (c) network 
-and simultaneously mutates all the weights of the child network then chooses the better network to become the father of the next generation. 
-For low dimensional data, this algorithm can be as efficient as naive gradient decent 
-and that is because it doesn't require the backward pass (back-propagtion), instead it requires 2 forward passes (which are less intensive computationally than the backward pass). 
-Also, if the loss functions is not convex or the local minima hides in a narrow and elongated ridge, then this algorithm can be more efficient than the naive gradient decent which produces a zigzagged path towards the local minima.
-
-Please note that we at Brainxyz currently working on a better appreach to efficiently learn from the feedback. For for info visit us at: https://www.brainxyz.com/
-
-'''
-
 import random;
 import math;
 from matplotlib import pylab as plt
