@@ -50,8 +50,9 @@ iterations = 1000
 errs, m_w1, m_w2 = train(X, y, w1, w2, iterations)
 
 ## check the results  
-print(feedforward(X, m_w1, m_w2))      
+yhat = feedforward(X, m_w1, m_w2) 
+print('actual:', y)
+print('prediction:', yhat.ravel())      
 plt.figure(1)
 plt.plot(errs)
 plt.title('errors')
-
