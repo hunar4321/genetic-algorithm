@@ -2,7 +2,7 @@
 A simple evolutionary-genetic algorithm (Simultaneous update of all the weights) implemented both in python and C++.
 The algorithm is very simple conceptually. it competes between two networks: a parent (f) & a child (c) network. It simultaneously mutates all the weights of the child network then chooses the better network to become the parent of the next generation. For low dimensional data, this algorithm can be as efficient as naive gradient decent and that is because it doesn't require the backward pass (back-propagtion), instead it requires 2 forward passes (which are less intensive computationally than a forward+backward pass). Also, if the loss function is not convex or the local minima hides in a narrow and elongated groove, then this algorithm can be more efficient than the naive gradient decent which produces a zigzagged path towards the minima as shown in the figure below.
 
-![](images/after-learning.gif)
+![](images/sgd_ga_compare.JPG)
 </br>
 
 For a detailed comparision between this GA method vs SGD methods please refer to this article:
@@ -20,5 +20,6 @@ https://www.brainxyz.com/machine-learning/genetic-algorthim/
 </br>
 
 
-visit us at: https://www.brainxyz.com/ 
+For more visit us at: https://www.brainxyz.com/ 
+
 License: MIT
