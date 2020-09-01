@@ -5,7 +5,8 @@ The algorithm is very simple conceptually. it competes between two networks: a p
 ![](images/sgd_ga_compare.JPG)
 </br>
 
-For a detailed comparision between this GA method vs SGD methods please refer to this article:
+For a detailed comparision between GA vs SGD please refer to this article:
+
 https://www.brainxyz.com/machine-learning/genetic-algorthim/
 
 **Files:**
