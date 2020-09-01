@@ -13,7 +13,7 @@ https://www.brainxyz.com/machine-learning/genetic-algorthim/
 
 1. *very_simple_GA.py:* This file contains a very simple GA implemenation using numpy (few lines of code). It solves the XOR problem.
 
-2. *Solve_Xor_and_Cartople.py:* This file implements GA from scratch using object oriented principles which gives more flexibility to structure the network and It has been showcased to solve clasififcation problems (Xor) and reinforcement learning (Cartople) using the same code base.
+2. *Solve_Xor_and_Cartople.py:* This file implements GA from scratch using object oriented principles which gives more flexibility to structure the network and It has been showcased to solve clasififcation problems (Xor) and reinforcement learning (Cartople) using the same code base. You need to install OpenAI's gym library to run the Cartpole example.
 
 3. *Solve_Xor.cpp:* a C++ implentation of the same code above.
 
