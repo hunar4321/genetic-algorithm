@@ -1,3 +1,7 @@
+![GitHub repo size](https://img.shields.io/github/repo-size/hunar4321/Genetic_Algorithm)
+![GitHub](https://img.shields.io/github/license/hunar4321/Genetic_Algorithm)
+![Website](https://img.shields.io/website?url=https%3A%2F%2Fwww.brainxyz.com%2F)
+
 # Genetic Algorthim
 A simple evolutionary-genetic algorithm (Simultaneous update of all the weights) implemented both in python and C++.
 The algorithm is very simple conceptually. it competes between two networks: a parent (f) & a child (c) network. It simultaneously mutates all the weights of the child network then chooses the better network to become the parent of the next generation. For low dimensional data, this algorithm can be as efficient as naive gradient descent and that is because it doesn't require the backward pass (back-propagtion), instead it requires 2 forward passes (which are less intensive computationally than a forward+backward pass). Also, if the loss function is not convex or the local minima hides in a narrow and elongated groove, then this algorithm can be more efficient than the naive gradient descent which produces a zigzagged path towards the minima as shown in the figure below (right: genetic algorthim, left: stochastic gradient descent).
