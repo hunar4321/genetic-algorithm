@@ -1,6 +1,5 @@
 ![GitHub repo size](https://img.shields.io/github/repo-size/hunar4321/Genetic_Algorithm)
 ![GitHub](https://img.shields.io/github/license/hunar4321/Genetic_Algorithm)
-![Website](https://img.shields.io/website?label=brainxyz.com&up_message=Build%20AI&url=https%3A%2F%2Fwww.brainxyz.com%2F)
 
 # Genetic Algorthim
 A simple evolutionary-genetic algorithm (Simultaneous update of all the weights) implemented both in python and C++.
