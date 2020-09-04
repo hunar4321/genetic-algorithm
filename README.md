@@ -27,5 +27,3 @@ https://www.brainxyz.com/machine-learning/genetic-algorthim/
 
 
 For more visit us at: https://www.brainxyz.com/ 
-
-License: MIT
