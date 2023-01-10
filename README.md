@@ -13,6 +13,7 @@ For a detailed comparision between GA vs SGD please refer to this article:
 https://www.brainxyz.com/machine-learning/genetic-algorthim/
 
 The algorithm was also briefly disscussed in this video:
+
 https://youtu.be/HiXUNNbPDH4?t=1309
 
 **Files:**
